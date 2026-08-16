@@ -16,7 +16,7 @@
   <style>
     :root {
       --bg-browser: #fcfaf3;
-      --card-bg: #686c54;
+      --card-bg: #4a5436;
       --text-light: #fcfaf3;
       --gold-main: #d4af37;
       --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
@@ -47,26 +47,127 @@
       border-radius: 24px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
       border: 1px solid var(--gold-border);
-      padding: 30px 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       position: relative;
       overflow: hidden;
     }
 
-    /* English Header Logo */
-    .header-logo {
+    /* Hero Header Section */
+    .hero-header {
+      position: relative;
       width: 100%;
-      max-width: 220px;
-      margin-bottom: 25px;
-      text-align: center;
+      height: 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .header-logo img {
+    /* حركة الـ Pan الأفقية الهادئة الممزوجة بالتقريب الفاخر */
+    .hero-bg {
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background-image: url('background.jpg'); 
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      animation: luxuryPan 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes luxuryPan {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(-3%, -2%) scale(1.08);
+      }
+      100% {
+        transform: translate(3%, 2%) scale(1.05);
+      }
+    }
+
+    /* طبقة اللون الزيتي الشفاف (بنسبة تقارب 18%) لزيادة وضوح اللوغو ودمج الهوية */
+    .hero-tint {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      object-fit: contain;
+      height: 100%;
+      background-color: rgba(74, 84, 54, 0.18); /* اللون الزيتي بشفافية مطلوبة */
+      z-index: 1;
+    }
+
+    /* طبقة تعتيم خفيفة جداً لدعم بروز اللوغو الذهبي */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.15); 
+      z-index: 2;
+    }
+
+    /* التدرج اللوني في الأسفل لدمج الصورة مع الكارت */
+    .hero-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(74, 84, 54, 0), rgba(74, 84, 54, 1));
+      z-index: 3;
+    }
+
+    .hero-logo {
+      position: relative;
+      z-index: 4;
+      width: 65%;
+      max-width: 200px;
+      /* ظل قوي ومدروس للوغو لكي يعزل نفسه بصرياً عن الصورة ويظهر بوضوح تام */
+      filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.6)) drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.8));
+    }
+
+    /* المحتوى الأساسي تحت الصورة */
+    .card-content {
+      padding: 0 20px 30px 20px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Quick Circular Actions */
+    .quick-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: -25px; 
+      margin-bottom: 25px;
+    }
+
+    .circle-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1.5px solid var(--gold-main);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .circle-btn:hover {
+      background: var(--gold-gradient);
+      color: #333;
+      transform: translateY(-3px);
     }
 
     /* Sections Styling */
@@ -75,7 +176,7 @@
       font-weight: 700;
       color: var(--gold-main);
       text-align: center;
-      margin: 20px 0 12px 0;
+      margin: 10px 0 15px 0;
       width: 100%;
       border-bottom: 1px solid var(--gold-border);
       padding-bottom: 6px;
@@ -84,7 +185,7 @@
     }
 
     .branch-card {
-      background: rgba(0, 0, 0, 0.12);
+      background: rgba(0, 0, 0, 0.15);
       border: 1px solid rgba(212, 175, 55, 0.2);
       border-radius: 16px;
       padding: 16px;
@@ -95,8 +196,8 @@
     .branch-name {
       font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--bg-browser);
+      margin-bottom: 10px;
+      color: var(--gold-main);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -143,7 +244,7 @@
     /* Square Social Grid */
     .social-square-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 12px;
       width: 100%;
       margin-top: 10px;
@@ -155,13 +256,13 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: rgba(253, 250, 243, 0.08);
+      background: rgba(0, 0, 0, 0.15);
       border: 1px solid var(--gold-main);
       border-radius: 16px;
-      padding: 20px 10px;
+      padding: 15px 5px;
       text-decoration: none;
       transition: all 0.3s ease;
-      aspect-ratio: 1; /* Makes them perfectly square */
+      aspect-ratio: 1;
     }
 
     .social-square-btn i {
@@ -172,50 +273,19 @@
 
     .social-square-btn span {
       color: var(--text-light);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       text-align: center;
       direction: ltr;
       font-family: 'Montserrat', sans-serif;
-      word-break: break-all;
+      white-space: nowrap;
       line-height: 1.2;
     }
 
     .social-square-btn:hover {
-      background: rgba(212, 175, 55, 0.2);
+      background: rgba(212, 175, 55, 0.3);
       transform: translateY(-5px);
       box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
-
-    /* Quick Circular Actions (Moved down) */
-    .quick-actions {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 15px 0 25px 0;
-      width: 100%;
-    }
-
-    .circle-btn {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(253, 250, 243, 0.1);
-      border: 1px solid var(--gold-main);
-      color: var(--text-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
-
-    .circle-btn:hover {
-      background: var(--gold-gradient);
-      color: #333;
-      transform: translateY(-3px);
     }
 
     /* Action Buttons (Portfolio & vCard) */
@@ -248,7 +318,6 @@
     .footer-logo {
       margin-top: 30px;
       width: 100%;
-      max-width: 150px;
       text-align: center;
       padding-top: 15px;
       border-top: 1px dashed var(--gold-border);
@@ -256,6 +325,7 @@
 
     .footer-logo img {
       width: 100%;
+      max-width: 120px;
       height: auto;
       object-fit: contain;
     }
@@ -265,127 +335,128 @@
 
   <div class="card-container">
     
-    <!-- Top English Logo -->
-    <div class="header-logo">
-      <img src="logo1.png" alt="Hanifa Jewelry Logo">
+    <!-- Hero Header -->
+    <div class="hero-header">
+      <div class="hero-bg"></div>
+      <div class="hero-tint"></div>       <!-- طبقة اللون الزيتي الشفاف الجديد -->
+      <div class="hero-overlay"></div>
+      <div class="hero-fade"></div>
+      <img src="logo1.png" alt="Hanifa Jewelry Logo" class="hero-logo">
     </div>
 
-    <!-- Branch 1 -->
-    <div class="branch-card">
-      <div class="branch-name">
-        <i class="fas fa-store" style="color: var(--gold-main);"></i>
-        الفرع الأول / Branch 1
-      </div>
-      
-      <!-- Address -->
-      <a href="https://maps.app.goo.gl/JkHQbd9oGcveVm4c9" target="_blank" class="info-link">
-        <i class="fas fa-map-marker-alt"></i>
-        <div>
-          سوريا - حلب - الفرقان - شارع الفتال
-          <span class="sub-text" dir="ltr">Aleppo - Syria - Fattal St. - Furqan</span>
-        </div>
-      </a>
+    <!-- المحتوى السفلي -->
+    <div class="card-content">
 
-      <!-- Mobile / WhatsApp -->
-      <a href="https://wa.me/963933780005" target="_blank" class="info-link">
-        <i class="fab fa-whatsapp"></i>
-        <div>
-          واتساب / Mobile: <span class="phone-number">+963 933 780 005</span>
-        </div>
-      </a>
-
-      <!-- Landline -->
-      <a href="tel:+963212687840" class="info-link">
-        <i class="fas fa-phone"></i>
-        <div>
-          هاتف ثابت: <span class="phone-number">+963 21 2687840</span> / <span class="phone-number">+963 21 2687919</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Branch 2 -->
-    <div class="branch-card">
-      <div class="branch-name">
-        <i class="fas fa-store" style="color: var(--gold-main);"></i>
-        الفرع الثاني / Branch 2
+      <!-- Quick Action Bar -->
+      <div class="quick-actions">
+        <a href="https://wa.me/963933780005" target="_blank" class="circle-btn" title="واتساب الفرع الأول">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://wa.me/963988888185" target="_blank" class="circle-btn" title="واتساب الفرع الثاني">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://maps.app.goo.gl/JkHQbd9oGcveVm4c9" target="_blank" class="circle-btn" title="الموقع على الخريطة">
+          <i class="fas fa-location-dot"></i>
+        </a>
       </div>
 
-      <!-- Address -->
-      <a href="https://maps.app.goo.gl/JkHQbd9oGcveVm4c9" target="_blank" class="info-link">
-        <i class="fas fa-map-marker-alt"></i>
-        <div>
-          سوريا - حلب - الموكامبو - شارع الروضة
-          <span class="sub-text" dir="ltr">Aleppo - Syria - Rawda St. - Mogambo</span>
+      <!-- Branch 1 -->
+      <div class="branch-card">
+        <div class="branch-name">
+          <i class="fas fa-store"></i>
+          الفرع الأول / Branch 1
         </div>
-      </a>
+        
+        <a href="https://maps.app.goo.gl/JkHQbd9oGcveVm4c9" target="_blank" class="info-link">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            سوريا - حلب - الفرقان - شارع الفتال
+            <span class="sub-text" dir="ltr">Aleppo - Syria - Fattal St. - Furqan</span>
+          </div>
+        </a>
 
-      <!-- Mobile / WhatsApp -->
-      <a href="https://wa.me/963988888185" target="_blank" class="info-link">
-        <i class="fab fa-whatsapp"></i>
-        <div>
-          واتساب / Mobile: <span class="phone-number">+963 988 888 185</span>
+        <a href="https://wa.me/963933780005" target="_blank" class="info-link">
+          <i class="fab fa-whatsapp"></i>
+          <div>
+            واتساب / Mobile: <span class="phone-number">+963 933 780 005</span>
+          </div>
+        </a>
+
+        <a href="tel:+963212687840" class="info-link">
+          <i class="fas fa-phone"></i>
+          <div>
+            هاتف ثابت: <span class="phone-number">+963 21 2687840</span> / <span class="phone-number">+963 21 2687919</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Branch 2 -->
+      <div class="branch-card">
+        <div class="branch-name">
+          <i class="fas fa-store"></i>
+          الفرع الثاني / Branch 2
         </div>
+
+        <a href="https://maps.app.goo.gl/JkHQbd9oGcveVm4c9" target="_blank" class="info-link">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            سوريا - حلب - الموكامبو - شارع الروضة
+            <span class="sub-text" dir="ltr">Aleppo - Syria - Rawda St. - Mogambo</span>
+          </div>
+        </a>
+
+        <a href="https://wa.me/963988888185" target="_blank" class="info-link">
+          <i class="fab fa-whatsapp"></i>
+          <div>
+            واتساب / Mobile: <span class="phone-number">+963 988 888 185</span>
+          </div>
+        </a>
+
+        <a href="tel:+963212687840" class="info-link">
+          <i class="fas fa-phone"></i>
+          <div>
+            هاتف ثابت: <span class="phone-number">+963 21 2687840</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="section-title">وسائل التواصل الاجتماعي</div>
+      <div class="social-square-grid">
+        <a href="https://www.instagram.com/hanifa_jewellry?igsh=MTc2ajk2eGc0N3B4aA==&igsi=MTc2ajk2eGc0N3B4aA==" target="_blank" class="social-square-btn">
+          <i class="fab fa-instagram"></i>
+          <span>@hanifa_jewellry</span>
+        </a>
+
+        <a href="https://www.instagram.com/hanifa.jewelry?igsh=bjc1cTRiNjJ3b2Np&igsi=bjc1cTRiNjJ3b2Np" target="_blank" class="social-square-btn">
+          <i class="fab fa-instagram"></i>
+          <span>@hanifa.jewelry</span>
+        </a>
+
+        <a href="https://www.facebook.com/share/17z7YEX6mJ/" target="_blank" class="social-square-btn">
+          <i class="fab fa-facebook-f"></i>
+          <span>Hanifa jewelry</span>
+        </a>
+      </div>
+
+      <!-- Portfolio Button -->
+      <a href="portfolio.pdf" target="_blank" class="cta-button">
+        <i class="fas fa-file-pdf"></i>
+        <span>Our Portfolio</span>
       </a>
 
-      <!-- Landline -->
-      <a href="tel:+963212687840" class="info-link">
-        <i class="fas fa-phone"></i>
-        <div>
-          هاتف ثابت: <span class="phone-number">+963 21 2687840</span>
-        </div>
-      </a>
+      <!-- Save vCard Button -->
+      <button onclick="downloadVCard()" class="cta-button" style="background: transparent; border: 1px solid var(--gold-main); color: var(--text-light);">
+        <i class="fas fa-address-card"></i>
+        <span>حفظ جهة الاتصال (Save VCard)</span>
+      </button>
+
+      <!-- Bottom Arabic Logo -->
+      <div class="footer-logo">
+        <img src="logo2.png" alt="حنيفة">
+      </div>
+
     </div>
-
-    <!-- Social Media Section (Square Grid) -->
-    <div class="section-title">وسائل التواصل الاجتماعي</div>
-    <div class="social-square-grid">
-      <a href="https://www.instagram.com/hanifa_jewellry?igsh=MTc2ajk2eGc0N3B4aA==&igsi=MTc2ajk2eGc0N3B4aA==" target="_blank" class="social-square-btn">
-        <i class="fab fa-instagram"></i>
-        <span>@hanifa_jewellry</span>
-      </a>
-
-      <a href="https://www.instagram.com/hanifa.jewelry?igsh=bjc1cTRiNjJ3b2Np&igsi=bjc1cTRiNjJ3b2Np" target="_blank" class="social-square-btn">
-        <i class="fab fa-instagram"></i>
-        <span>@hanifa.jewelry</span>
-      </a>
-
-      <a href="https://www.facebook.com/share/17z7YEX6mJ/" target="_blank" class="social-square-btn">
-        <i class="fab fa-facebook-f"></i>
-        <span>Hanifa jewelry</span>
-      </a>
-    </div>
-
-    <!-- Quick Action Bar (Moved Below) -->
-    <div class="quick-actions">
-      <a href="https://wa.me/963933780005" target="_blank" class="circle-btn" title="واتساب الفرع الأول">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://wa.me/963988888185" target="_blank" class="circle-btn" title="واتساب الفرع الثاني">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://maps.app.goo.gl/JkHQbd9oGcveVm4c9" target="_blank" class="circle-btn" title="الموقع على الخريطة">
-        <i class="fas fa-location-dot"></i>
-      </a>
-      <!-- Note: Replaced vCard circle button with only the large CTA button below per typical UI flow, but kept it if you want both -->
-    </div>
-
-    <!-- Portfolio Button -->
-    <a href="portfolio.pdf" target="_blank" class="cta-button">
-      <i class="fas fa-file-pdf"></i>
-      <span>Our Portfolio</span>
-    </a>
-
-    <!-- Save vCard Button -->
-    <button onclick="downloadVCard()" class="cta-button" style="background: transparent; border: 1px solid var(--gold-main); color: var(--text-light);">
-      <i class="fas fa-address-card"></i>
-      <span>حفظ جهة الاتصال (Save VCard)</span>
-    </button>
-
-    <!-- Bottom Arabic Logo -->
-    <div class="footer-logo">
-      <img src="logo2.png" alt="حنيفة">
-    </div>
-
   </div>
 
   <!-- JavaScript for dynamic vCard generation -->
